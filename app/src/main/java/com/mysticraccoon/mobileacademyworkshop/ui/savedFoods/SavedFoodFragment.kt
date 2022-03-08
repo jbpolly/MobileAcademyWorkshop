@@ -5,12 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.mysticraccoon.mobileacademyworkshop.R
+import com.mysticraccoon.mobileacademyworkshop.data.models.FoodItem
 import com.mysticraccoon.mobileacademyworkshop.databinding.FragmentSavedFoodBinding
+import com.mysticraccoon.mobileacademyworkshop.ui.foodList.FoodListFragmentDirections
 
 class SavedFoodFragment: Fragment() {
 
     private var _binding: FragmentSavedFoodBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: SavedFoodViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,11 +30,43 @@ class SavedFoodFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this).get(SavedFoodViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        setupAdapter()
+
+        binding.fabBrowse.setOnClickListener {
+            findNavController().navigate(R.id.action_savedFoodFragment_to_foodCategoriesFragment)
+        }
+
 
 
     }
 
+    private fun setupAdapter() {
+        val adapter = SavedFoodDiffAdapter(SavedFoodItemClicked(block = {
+            //go to food details
+            findNavController().navigate(
+                SavedFoodFragmentDirections.actionSavedFoodFragmentToFoodDetailsFragment(
+                    FoodItem(
+                        "food1",
+                        "batata",
+                        "muito bom",
+                        "muito bom",
+                        "worldwide"
+                    )
+                )
+            )
+        }, deleteClick = {
+            //remove item from dao and list
+        }))
+        adapter.submitList(viewModel.fakeSavedList)
+        binding.savedFoodList.adapter = adapter
+    }
+
     override fun onDestroyView() {
+        binding.savedFoodList.adapter = null
         super.onDestroyView()
         _binding = null
     }

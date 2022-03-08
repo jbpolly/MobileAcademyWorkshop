@@ -5,10 +5,15 @@
       <map>
         <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/drawable-v24/bg_list_item.xml" value="0.345" />
         <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/drawable/bg_list_item.xml" value="0.345" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/drawable/bg_saved_food_item.xml" value="0.2405" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/drawable/ic_favorite_24.xml" value="0.2185" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/drawable/ic_favorite_border_24.xml" value="0.2185" />
         <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_food_categories.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_food_details.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_saved_food.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_food_details.xml" value="0.18" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_food_list.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/fragment_saved_food.xml" value="0.16" />
+        <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/layout/viewholder_saved_food_item.xml" value="0.25" />
         <entry key="..\:/Users/Poatek/StudioProjects/MobileAcademyWorkshop/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1975" />
       </map>
     </option>

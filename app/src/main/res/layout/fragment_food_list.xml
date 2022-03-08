@@ -3,11 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.mysticraccoon.mobileacademyworkshop.ui.foodCategories.FoodCategoriesViewModel" />
-
+            type="com.mysticraccoon.mobileacademyworkshop.ui.foodList.FoodListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +14,7 @@
         android:background="@color/bg_yellow">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/example_category"
+            android:id="@+id/example_food"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_margin="@dimen/margin_medium"
@@ -24,13 +22,12 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="Example Category"
+            android:text="Example Food Item"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

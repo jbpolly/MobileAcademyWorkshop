@@ -7,5 +7,44 @@
     <fragment
         android:id="@+id/savedFoodFragment"
         android:name="com.mysticraccoon.mobileacademyworkshop.ui.savedFoods.SavedFoodFragment"
-        android:label="SavedFoodFragment" />
+        android:label="SavedFoodFragment" >
+        <action
+            android:id="@+id/action_savedFoodFragment_to_foodCategoriesFragment"
+            app:destination="@id/foodCategoriesFragment" />
+        <action
+            android:id="@+id/action_savedFoodFragment_to_foodDetailsFragment"
+            app:destination="@id/foodDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodCategoriesFragment"
+        android:name="com.mysticraccoon.mobileacademyworkshop.ui.foodCategories.FoodCategoriesFragment"
+        android:label="FoodCategoriesFragment" >
+        <action
+            android:id="@+id/action_foodCategoriesFragment_to_foodListFragment"
+            app:destination="@id/foodListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodListFragment"
+        android:name="com.mysticraccoon.mobileacademyworkshop.ui.foodList.FoodListFragment"
+        android:label="FoodListFragment" >
+        <action
+            android:id="@+id/action_foodListFragment_to_foodDetailsFragment"
+            app:destination="@id/foodDetailsFragment" />
+        <argument
+            android:name="foodCategory"
+            app:argType="com.mysticraccoon.mobileacademyworkshop.data.models.FoodCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodDetailsFragment"
+        android:name="com.mysticraccoon.mobileacademyworkshop.ui.foodDetails.FoodDetailsFragment"
+        android:label="FoodDetailsFragment" >
+        <action
+            android:id="@+id/action_foodDetailsFragment_to_savedFoodFragment"
+            app:destination="@id/savedFoodFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/savedFoodFragment" />
+        <argument
+            android:name="foodItem"
+            app:argType="com.mysticraccoon.mobileacademyworkshop.data.models.FoodItem" />
+    </fragment>
 </navigation>
