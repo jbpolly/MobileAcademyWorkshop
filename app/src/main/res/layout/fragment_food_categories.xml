@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,18 +16,44 @@
         android:layout_height="match_parent"
         android:background="@color/bg_yellow">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/example_category"
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/example_category"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_margin="@dimen/margin_medium"-->
+<!--            android:background="@drawable/bg_list_item"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Example Category"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/food_categories_list"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_margin="@dimen/margin_medium"
-            android:background="@drawable/bg_list_item"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="Example Category"
-            android:textColor="@color/black"
-            android:textSize="14sp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:nestedScrollingEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="15"
+            tools:listitem="@layout/viewholder_food_category_list_item" />
+
+        <ProgressBar
+            android:id="@+id/category_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:visibility="gone"
+            android:indeterminateTint="@color/dark_green"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mysticraccoon.mobileacademyworkshop.R
 import com.mysticraccoon.mobileacademyworkshop.data.models.FoodItem
 import com.mysticraccoon.mobileacademyworkshop.databinding.ViewholderSavedFoodItemBinding
 
@@ -62,7 +64,11 @@ class SavedFoodItemViewHolder(private val binding: ViewholderSavedFoodItemBindin
 
     fun bind(item: FoodItem, itemClick: SavedFoodItemClicked){
         binding.itemTitle.text = item.name
-        //TODO add url to imageView
+        Glide.with(itemView)
+            .load(item.url)
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_no_food)
+            .into(binding.itemThumb)
 
         binding.itemDelete.setOnClickListener {
             itemClick.deleteClick(item)

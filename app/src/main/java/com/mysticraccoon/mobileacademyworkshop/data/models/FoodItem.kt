@@ -1,10 +1,17 @@
 package com.mysticraccoon.mobileacademyworkshop.data.models
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.mysticraccoon.mobileacademyworkshop.core.utils.FoodTrackerConstants
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = FoodTrackerConstants.foodItemTableName)
 data class FoodItem(
+    @PrimaryKey
+    @ColumnInfo(name = FoodTrackerConstants.foodItemIdColumnName)
     val id: String,
     val name: String,
     val url: String,

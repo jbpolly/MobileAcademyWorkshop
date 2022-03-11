@@ -5,9 +5,7 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.mysticraccoon.mobileacademyworkshop.ui.foodDetails.FoodDetailsViewModel" />
+
 
     </data>
 

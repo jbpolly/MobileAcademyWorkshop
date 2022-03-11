@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.mysticraccoon.mobileacademyworkshop.R
+import androidx.recyclerview.widget.GridLayoutManager
+import com.mysticraccoon.mobileacademyworkshop.core.network.Network
+import com.mysticraccoon.mobileacademyworkshop.core.room.FoodTrackerDatabase
 import com.mysticraccoon.mobileacademyworkshop.data.models.FoodCategory
+import com.mysticraccoon.mobileacademyworkshop.data.repository.FoodCategoryRepository
 import com.mysticraccoon.mobileacademyworkshop.databinding.FragmentFoodCategoriesBinding
 
 class FoodCategoriesFragment : Fragment() {
@@ -30,17 +32,56 @@ class FoodCategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(FoodCategoriesViewModel::class.java)
+        val repository = FoodCategoryRepository(foodCategoryDao = FoodTrackerDatabase.getInstance(requireContext()).foodCategoryDao(),api = Network.retrofit)
+        val factory = FoodCategoriesViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this, factory).get(FoodCategoriesViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.exampleCategory.setOnClickListener {
+//        binding.exampleCategory.setOnClickListener {
+//            findNavController().navigate(
+//                FoodCategoriesFragmentDirections.actionFoodCategoriesFragmentToFoodListFragment(
+//                    foodCategory = FoodCategory("teste", "titulo 1", "url")
+//                )
+//            )
+//        }
+        setupObservers()
+        setupAdapter()
+    }
+
+    private fun setupObservers() {
+
+        viewModel.showLoading.observe(viewLifecycleOwner){ loading ->
+            if(loading){
+                binding.categoryProgressBar.visibility = View.VISIBLE
+            }else{
+                binding.categoryProgressBar.visibility = View.GONE
+            }
+        }
+
+    }
+
+    private fun setupAdapter() {
+
+        val manager = GridLayoutManager(requireActivity(), 2)
+        binding.foodCategoriesList.layoutManager = manager
+
+        val adapter = FoodCategoryAdapter(FoodCategoryClicked { category ->
             findNavController().navigate(
                 FoodCategoriesFragmentDirections.actionFoodCategoriesFragmentToFoodListFragment(
-                    foodCategory = FoodCategory("teste", "titulo 1", "url")
+                    foodCategory = category
                 )
             )
+        })
+        binding.foodCategoriesList.adapter = adapter
+
+        viewModel.foodCategories.observe(viewLifecycleOwner){ list ->
+            list?.let {
+                adapter.submitList(it)
+            }
         }
+
     }
 
     override fun onDestroyView() {

@@ -66,11 +66,16 @@ dependencies {
     //Retrofit with moshi
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-
     implementation "com.squareup.moshi:moshi-kotlin:1.11.0"
     implementation 'com.squareup.moshi:moshi:1.11.0'
     implementation 'com.squareup.moshi:moshi-adapters:1.11.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
+
+    //retrofit logging interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+
+    //Network response adapter for okHttp
+    implementation "com.github.haroldadmin:NetworkResponseAdapter:4.1.0"
 
     //retrofit logging interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"

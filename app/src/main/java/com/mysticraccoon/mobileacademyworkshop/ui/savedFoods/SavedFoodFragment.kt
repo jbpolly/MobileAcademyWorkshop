@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.mysticraccoon.mobileacademyworkshop.R
+import com.mysticraccoon.mobileacademyworkshop.core.room.FoodTrackerDatabase
 import com.mysticraccoon.mobileacademyworkshop.data.models.FoodItem
+import com.mysticraccoon.mobileacademyworkshop.data.repository.FoodItemRepository
 import com.mysticraccoon.mobileacademyworkshop.databinding.FragmentSavedFoodBinding
+import com.mysticraccoon.mobileacademyworkshop.ui.foodDetails.FoodDetailsViewModelFactory
 import com.mysticraccoon.mobileacademyworkshop.ui.foodList.FoodListFragmentDirections
 
 class SavedFoodFragment: Fragment() {
@@ -30,7 +33,10 @@ class SavedFoodFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(SavedFoodViewModel::class.java)
+        val repository = FoodItemRepository( FoodTrackerDatabase.getInstance(requireContext()).foodItemDao())
+        val factory = SavedFoodViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this, factory).get(SavedFoodViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -40,29 +46,22 @@ class SavedFoodFragment: Fragment() {
             findNavController().navigate(R.id.action_savedFoodFragment_to_foodCategoriesFragment)
         }
 
-
-
     }
 
     private fun setupAdapter() {
-        val adapter = SavedFoodDiffAdapter(SavedFoodItemClicked(block = {
+        val adapter = SavedFoodDiffAdapter(SavedFoodItemClicked(block = { item ->
             //go to food details
-            findNavController().navigate(
-                SavedFoodFragmentDirections.actionSavedFoodFragmentToFoodDetailsFragment(
-                    FoodItem(
-                        "food1",
-                        "batata",
-                        "muito bom",
-                        "muito bom",
-                        "worldwide"
-                    )
-                )
-            )
-        }, deleteClick = {
+            findNavController().navigate(SavedFoodFragmentDirections.actionSavedFoodFragmentToFoodDetailsFragment(item))
+
+        }, deleteClick = { item ->
             //remove item from dao and list
+            viewModel.deleteFoodItem(item)
         }))
-        adapter.submitList(viewModel.fakeSavedList)
         binding.savedFoodList.adapter = adapter
+        viewModel.savedFoods.observe(viewLifecycleOwner){ list ->
+            adapter.submitList(list)
+        }
+
     }
 
     override fun onDestroyView() {
